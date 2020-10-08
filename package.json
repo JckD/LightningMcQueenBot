@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/JckD/ReminderBot/issues"
   },
-  "homepage": "https://github.com/JckD/ReminderBot#readme"
+  "homepage": "https://github.com/JckD/ReminderBot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
 }
