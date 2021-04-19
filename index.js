@@ -29,47 +29,56 @@ client.login(process.env.TOKEN)
 
 //const members = guild.members
 //console.log(members)
-
-
+console.log(client.commands.lit)
 
 client.on('message', message => {
-    console.log(channel);
+    if(message.author.bot) return;
+    console.log(channel, message.content, message.author.username);
 
+    //console.log(message.author.bot)
     //message.channel.send('<@'+ user+ '> have you got the tattoo yet?')
     // Quick responses no need to be single commands
-    if (message.channel.name !== 'general') return;
-    if (message.content.includes('lightning') || message.content.includes('McQueen') || message.content.includes('kachow')) {
-        message.channel.send('I fucked your Mom Shitlips')
-    }
-    else if (message.content.includes('speed')) {
-        message.channel.send('I am Speed, Faster than Fast! Quicker than Quick')
-    } 
-    else if (message.content.includes('float like a cadilac')) {
-        message.channel.send('Sting like a Beemer!')
-    }
+    if(message.author.bot) return;
+    if (message.channel.name == 'the-serval-pit') {
+        //console.log(message.content)
+        messageLowerCase = message.content.toLowerCase()
+        
+        if (message.content.toLowerCase().includes('lightning') || message.content.toLowerCase().includes('mcqueen')|| message.content.toLowerCase().includes('kachow')) {
+            message.channel.send('I fucked your Mom Shitlips')
+        }
+        else if (message.content.toLowerCase().includes('speed')) {
+            message.channel.send('I am Speed, Faster than Fast! Quicker than Quick')
+        } 
+        else if (message.content.toLowerCase().includes('float like a cadilac')) {
+            message.channel.send('Sting like a Beemer!')
+        } else if (message.content.toLowerCase().includes('are those stickers?')) {
+            client.commands.get('lit').execute(message)
+        } else if (message.content.toLowerCase().includes('wow')) {
+            client.commands.get('wow').execute(message)
+        }
    
 
-    //if (!message.content.startsWith(prefix) || message.author.bot) return;
+        //if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).split(/ +/);
-    //console.log(args)
-    const commandName = args.shift().toLowerCase();
-    //console.log(commandName)
-    const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+        const args = message.content.slice(prefix.length).split(/ +/);
+        //console.log(args)
+        const commandName = args.shift().toLowerCase();
+        //console.log(commandName)
+        const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 
-    if (!command) return;
+        if (!command) return;
 
-    //else if (!message.content.startsWith(prefix) || message.author.bot) return;
-    
-	try {
-		command.execute(message, args);
-	}
-	catch(error) {
-		console.error(error);
-		message.reply('there was an error trying to executre that command!');
-	}
-
+        //else if (!message.content.startsWith(prefix) || message.author.bot) return;
+        
+        try {
+            command.execute(message, args);
+        }
+        catch(error) {
+            console.error(error);
+            message.reply('there was an error trying to execute that command!');
+        }
+    }
     
 });
 
