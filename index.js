@@ -29,20 +29,24 @@ client.login(process.env.TOKEN)
 
 //const members = guild.members
 //console.log(members)
-console.log(client.commands.lit)
 
+//client.user.setActivity('Cars 3', {type: 'WATCHING'});
 client.on('message', message => {
     if(message.author.bot) return;
-    console.log(channel, message.content, message.author.username);
+    console.log(message.channel.name,',', message.author.username,':', message.content);
 
     //console.log(message.author.bot)
     //message.channel.send('<@'+ user+ '> have you got the tattoo yet?')
     // Quick responses no need to be single commands
-    if(message.author.bot) return;
-    if (message.channel.name == 'the-serval-pit') {
+    if(message.webhookID) {
+        message.channel.send('Suck my fat exhaust pipe')
+    }
+    
+    if(message.channel.name != channel) return;
+    //if (message.channel.name == 'the-serval-pit') {
         //console.log(message.content)
         messageLowerCase = message.content.toLowerCase()
-        
+        console.log(message.author.roles)
         if (message.content.toLowerCase().includes('lightning') || message.content.toLowerCase().includes('mcqueen')|| message.content.toLowerCase().includes('kachow')) {
             message.channel.send('I fucked your Mom Shitlips')
         }
@@ -55,6 +59,9 @@ client.on('message', message => {
             client.commands.get('lit').execute(message)
         } else if (message.content.toLowerCase().includes('wow')) {
             client.commands.get('wow').execute(message)
+            client.commands.get('changePermission').execute(message)
+        } else if (message.content.toLocaleLowerCase().includes('what is life?')) {
+            client.commands.get('highway').execute(message)
         }
    
 
@@ -78,7 +85,7 @@ client.on('message', message => {
             console.error(error);
             message.reply('there was an error trying to execute that command!');
         }
-    }
+    //}
     
 });
 
